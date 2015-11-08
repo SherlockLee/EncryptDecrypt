@@ -1,0 +1,119 @@
+#include <iostream>
+
+using namespace std;
+# define N 26
+int searchnum(char t)
+    {
+        char r;
+        char str[26];
+        for(int i=1,r='A';i<=N;i++,r++)
+        {
+            str[i]=r;
+        }
+        for(int i=1;i<=N;i++)
+        {
+            if(t==str[i])
+            return i;
+        }
+    }
+char searchchar(int t)
+{
+        char r;
+        char str[26];
+        for(int i=1,r='A';i<=N;i++,r++)
+        {
+            str[i]=r;
+        }
+        for(int i=1;i<=N;i++)
+        {
+            if(t==i)
+            return str[i];
+        }
+}
+void jiami()
+{
+    char str[50];
+    int k;
+    cout<<"请输入您的密钥:"<<endl;
+    //int m;
+    //char s;
+    cin>>k;
+    cout<<"请输入您的明文:"<<endl;
+    cin>>str;
+    for(int i=0;str[i]!='\0';i++)
+    {
+        int a,b;
+        char ch=str[i];
+        int m=searchnum(ch);
+        a=m+k;
+        b=a%26;
+        char c=searchchar(b);
+        str[i]=c;
+    }
+    cout<<"您的密文是:"<<endl;
+    for(int i=0;str[i]!='\0';i++)
+    {
+        cout<<str[i];
+    }
+
+}
+void jiemi()
+{
+    char str[50];
+    int k;
+    cout<<"请输入您的密钥:"<<endl;
+    //int m;
+    //char s;
+    cin>>k;
+    cout<<"请输入您的密文:"<<endl;
+    cin>>str;
+    for(int i=0;str[i]!='\0';i++)
+    {
+        int a,b;
+        char ch=str[i];
+        int m=searchnum(ch);
+        if(m<k)
+        {
+            a=m+N-k;
+            b=a%N;
+        }
+        else if(m>k)
+        {
+            a=m-k;
+            b=a%N;
+        }
+        else
+        {
+            b=N;
+        }
+        char c=searchchar(b);
+        str[i]=c;
+    }
+    cout<<"您的明文是:"<<endl;
+    for(int i=0;str[i]!='\0';i++)
+    {
+        cout<<str[i];
+    }
+
+}
+
+int main()
+{
+    int choice;
+    cout<<"请输入您的选择:"<<endl;
+    cout<<"1.加密;2.解密;"<<endl;
+    cin>>choice;
+    switch (choice)
+    {
+        case 1:
+            jiami();
+            break;
+        case 2:
+            jiemi();
+            break;
+        default:
+            break;
+    }
+       // cout << searchnum(s)<< endl;
+    return 0;
+}

@@ -1,0 +1,51 @@
+// Test_lbc.cpp : Defines the entry point for the console application.
+//
+
+//#include "stdafx.h"
+#include <string.h>
+#include <stdio.h>
+// #include <conio.h>
+// #include <dos.h>
+/**************************************************************************
+*  函数原型 :	void DO_Change_Line(char *Sec,int  FirstLen,char *EndStr,char *Swap)
+*  作    者 :	yy
+*  说    明 :	在指定位置之后的一位添加换行符产生新的字符串
+*  输入参数 :	char *Sec		--- 需处理的字符串,
+				int  FirstLen	--- 要添加换行的位置；若是中文字符必须为偶数
+				char *Swap		--- 中间转换用的字符串，可自行定义
+*  输出参数 :	无
+*  返 回 值 :	char *EndStr	--- 处理完成的字符串
+*  使用范例：
+					char ch1[18];
+					char ch2[18];
+					memset(ch1,0x00,sizeof(ch1));
+					memset(ch2,0x00,sizeof(ch2));
+					DO_Change_Line(ch,8,ch1,ch2);
+	 				printf("%s\n",ch1);
+* -----------------------------------------------------------------*/
+void  DO_Change_Line(char *Sec,int  FirstLen,char *EndStr,char *Swap)
+{
+	int Ch_Size=strlen(Sec);
+	int i=0;
+	int k=0;
+	int j=FirstLen;
+		for (i;i<FirstLen;i++)
+		EndStr[i]=*(Sec+i);
+ 	for (k,j;k<FirstLen+1,j<Ch_Size;k++,j++)
+		Swap[k]=*(Sec+j);
+	strcat(EndStr," \n");
+	strcat(EndStr,Swap);
+	return ;
+}
+int main(int argc, char* argv[])
+{
+ 	char *ch="昆明金格百货汇都店汇美有限公司";
+	char ch1[512];
+	char ch2[512];
+	memset(ch1,0x00,sizeof(ch1));
+	memset(ch2,0x00,sizeof(ch2));
+	DO_Change_Line(ch,18,ch1,ch2);
+	 	printf("%s\n",ch1);
+	return 0;
+}
+
